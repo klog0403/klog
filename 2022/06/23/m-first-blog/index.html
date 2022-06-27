@@ -10,9 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="this is my first blog
-this is my first try
-"> 
+    <meta name="description" content="gulp更高效 异步多任务  会自动清除没有使用的数据任务化 做任何才做都要创建一个任务基于流  有自己的内存 读本地内存 操作后 流出
+Gulp APIGulp.src(globs[.option,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/klog/img/favicon.png"> 
@@ -21,9 +20,8 @@ this is my first try
     
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content=" - Hexo"/>
-    <meta name="twitter:description" content="this is my first blog
-this is my first try
-"/>
+    <meta name="twitter:description" content="gulp更高效 异步多任务  会自动清除没有使用的数据任务化 做任何才做都要创建一个任务基于流  有自己的内存 读本地内存 操作后 流出
+Gulp APIGulp.src(globs[.option,"/>
     
     
     
@@ -31,9 +29,8 @@ this is my first try
     <meta property="og:site_name" content="Hexo"/>
     <meta property="og:type" content="object"/>
     <meta property="og:title" content=" - Hexo"/>
-    <meta property="og:description" content="this is my first blog
-this is my first try
-"/>
+    <meta property="og:description" content="gulp更高效 异步多任务  会自动清除没有使用的数据任务化 做任何才做都要创建一个任务基于流  有自己的内存 读本地内存 操作后 流出
+Gulp APIGulp.src(globs[.option,"/>
     
 <link rel="stylesheet" href="/klog/css/diaspora.css">
 
@@ -70,8 +67,45 @@ this is my first try
 
         </div>
         <div class="content markdown">
-            <p>this is my first blog</p>
-<p>this is my first try</p>
+            <p>gulp<br>更高效 异步多任务  会自动清除没有使用的数据<br>任务化 做任何才做都要创建一个任务<br>基于流  有自己的内存 读本地内存 操作后 流出</p>
+<p>Gulp API<br>Gulp.src(globs[.options])</p>
+<p>gulp.dest</p>
+<p>gulp.task  做任何任务 都要先创建这个 </p>
+<p>gulp.watch 监听</p>
+<p>plugins 里面都是插件：gulp-concat合并文件 gulp-uglify压缩js文件 gulp-rename重命名…</p>
+<p>合并js</p>
+<p>dist文件夹 放打包文件<br>Js—合并好的文件.js<br>src<br>-css<br>-js<br>-less or sass</p>
+<p>Npm install gulp -g<br>Npm install gulp - -save -dev 局部</p>
+<p>gulpfile.js<br>var gulp &#x3D; require（’gulp’）；</p>
+<p>gulp.task（“任务名”， function（）{  &#x2F;&#x2F;任务名设置js 函数里面return gulp.src（’目标源文件’）<br>&#x2F;&#x2F;配置任务的操作<br>return gulp.src（’’）<br>.pipe（concat（’合并好的文件名.js’））&#x2F;&#x2F;临时合并文件<br>.pipe（gulp.dest(‘dist&#x2F;js&#x2F;’)）&#x2F;&#x2F;输出文件到本地<br>.pipe(uglify()) &#x2F;&#x2F;压缩文件<br>.pipe(rename({suffix: ‘.min’})) &#x2F;&#x2F;重命名<br>.pipe(gulp.dest(‘dist&#x2F;js’))</p>
+<p>}）</p>
+<p>&#x2F;&#x2F;注册默认任务<br>gulp.task（“default”，[]）</p>
+<p><img src="/klog/../../public/img/gulp/1.png" alt="Alt"><br>任务里面 首先将js css less都启动了 至于谁先完成 就看它们自身的大小 异步<br>存在问题：<br>css比less小 先完成 但是我们需要less先完成</p>
+<p><img src="/klog/../../public/img/gulp/2.png" alt="Alt"></p>
+<p>那么就在css的task里面添加[‘less’]产生依赖 这样就会less执行完再执行css</p>
+<p>npm install gulp-concat gulp-uglify gulp-rename - - save -dev 同时下载多个包 下载完后像 var gulp &#x3D; require（’gulp’）；一样 要引用<br>var concat &#x3D; require（’gulp-concat’）；<br>var uglify &#x3D; require（’gulp-uglify’）；<br>var rename &#x3D; require（’gulp-rename’）；</p>
+<p>合并less</p>
+<p>下载插件<br>Npm install gulp-less gulp-clean-css  - -save -dev<br>配置编码<br>Var less &#x3D; require(‘gulp-less’);<br>Var cleanCSS &#x3D; require(‘gulp-clean-css’);<br>引入插件<br>Var less &#x3D; require(‘gulp-less’);<br>Var cssClean &#x3D; require(‘gulp-clean-css’);  &#x2F;&#x2F;小驼峰命名法</p>
+<p>&#x2F;&#x2F;注册转换less的任务<br>Gulp.task（’less’，function（）{<br>return gulp.src（’src&#x2F;less&#x2F;*.less’）<br>.pipe（less（））<br>.pipe（gulp.dest（’src&#x2F;css&#x2F;’））<br>}）；</p>
+<p><img src="/klog/../../public/img/gulp/3.png" alt="Alt"><br>打包测试 gulp<br>处理html</p>
+<p>下载插件： npm install gulp-htmlmin - -save-dev<br>引入插件： var htmlMin &#x3D; require（’gulp-htmlmin’）；<br><img src="/klog/../../public/img/gulp/4.png" alt="Alt"></p>
+<p>存在问题 开发的时候都在根目录上 但是读取的时候读的dist里面的index 会失去样式 行为，那么就要在html 里面 将dist&#x2F;删除<br><img src="/klog/../../public/img/gulp/5.png" alt="Alt"></p>
+<p>&#x2F;&#x2F;注册监视任务</p>
+<p>下载插件<br>npm install gulp-livereload - -save -dev</p>
+<p>配置编码：<br>Var livereLoad &#x3D; require(‘gulp-livereload’);</p>
+<p>启动监听之前 要先执行完default里面的任务，下图不用再添加less 因为css包含了less的改动</p>
+<p><img src="/klog/../../public/img/gulp/6.png" alt="Alt"></p>
+<p>&#x2F;&#x2F;所有的pipe<br>.pipe（livereload（））；可以作为方法使用 实时监听</p>
+<p>注册：<br>Var livereload &#x3D; require(‘gulp-livereload’);</p>
+<p>.pipe(livereload());要在每一个task最后添加  手动刷新 半自动</p>
+<p>插件 gulp-connect<br>里面有一个微型服务器<br>Npm install gulp-connect - - save - dev<br>引入插件<br>var connect &#x3D; require（’gulp-connect’）；</p>
+<p>&#x2F;&#x2F;注册监听任务（全自动）</p>
+<p><img src="/klog/../../public/img/gulp/7.png" alt="Alt"><br>在每个需要实时监听的task下面添加<br>.pipe（connect.reload()）就可以自动更新了<br>端口设置了5000 浏览器登录localhost：5000 界面随数据改变而改变</p>
+<p><img src="/klog/../../public/img/gulp/8.png" alt="Alt"></p>
+<p>open插件 安装方式和上面一样 下载 引入<br>&#x2F;&#x2F;open插件可以自动打开指定地址      终端输入 gulp server就可以自动打开</p>
+<p><img src="/klog/../../public/img/gulp/9.png" alt="Alt"></p>
+<p>Gulp-load-plugins 插件<br>Pipe里面引用的插件前面都要加上$<br>其中htmlMin 要改成 htmlmin<br>和 cssClean需要修改 cleancss</p>
+<p><img src="/klog/../../public/img/gulp/10.png" alt="Alt"><br><img src="/klog/../../public/img/gulp/11.png" alt="Alt"></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
